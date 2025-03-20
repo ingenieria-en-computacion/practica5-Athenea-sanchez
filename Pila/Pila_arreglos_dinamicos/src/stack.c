@@ -9,7 +9,18 @@
  *          Asigna memoria dinámica a data mediante malloc con un número de elementos igual a len
  */
 Stack stack_create(int len){
-
+ Stack e; 
+ e.data= (Data*)malloc(len*sizeof(Data)); 
+ if (e.data==NULL) {
+     printf("Error: Stack cannot be created \n");   
+     e.top = -1;
+     e.size = 0;
+ }    
+ else {
+     e.top=-1; 
+     e.len=len; 
+ }
+  return e; 
 }
 
 /**
@@ -21,8 +32,15 @@ Stack stack_create(int len){
  *          la función no realiza ninguna operación.
  */
 void stack_push(Stack* s, Data d){
+    if (s->top>=len-1){
+        printf("La pila esta llena\n"); 
+    }
+   else { 
+     s->top++; 
+     s->data[s->top]=d; 
+   }
+  }
 
-}
 
 /**
  * Elimina y devuelve el elemento en la parte superior de la pila.
@@ -34,7 +52,13 @@ void stack_push(Stack* s, Data d){
  *          Si la pila está vacía, no se realiza ninguna operación y se devuelve un valor de error.
  */
 Data stack_pop(Stack* s){
-
+  if(s->top>-1){
+    s->top--;
+    printf("El dato que se eliminara sera:\n %i ",s->data[s->top] ); 
+    return  s->data[s->top]; 
+}else
+    printf("La pila está vacía\n");
+    return -1; 
 }
 
 /**
@@ -46,6 +70,16 @@ Data stack_pop(Stack* s){
  *          como `stack_pop` en una pila vacía.
  */
 int stack_is_empty(Stack* s){
+  if (s=NULL){
+     printf("Error: The stack doesn't exist\n"); 
+     return -1; 
+  } else if(s->top=-1){
+    printf("The stack is empty\n"); 
+    return 1; 
+  } else if(s->top !=-1){
+    printf("The stack isn't empty\n"); 
+    return 0; 
+  }
 
 }
 
@@ -56,6 +90,12 @@ int stack_is_empty(Stack* s){
  * @details Esta función hace que top sea igual a -1
  */
 void stack_empty(Stack* s){
+  if(stack_is_empty (s)=1){
+      printf("Stack is already empty\n"); 
+  } else if(stack_is_empty(s)= 0){
+     s->top=-1;
+     printf("Stack is empty, now you have: %i spaces free\n", s->len); 
+  }
 
 }
 
@@ -66,7 +106,14 @@ void stack_empty(Stack* s){
  * @details Esta función libera la memoria asignada dinámicamente para data dentro de la pila
  */
 void stack_delete(Stack *s){
-
+   if (s->len>0){
+     free (s); 
+     s=NULL; 
+     printf("The stack was deleted succesfully\n");
+   }
+ else if (s->len <0 && s==NULL) {
+  printf("Error: Stack doesn't valid\n"); 
+ }
 }
 
 /**
@@ -79,5 +126,9 @@ void stack_delete(Stack *s){
  *          la salida estándar (stdout).
  */
 void stack_print(Stack *s){
-
+  if (stack_is_empty(s)=0){
+    for (int e= s->top; e=0; e++){
+       printf("Stack is: %d", s->data[e])
+    }
+  }
 }
