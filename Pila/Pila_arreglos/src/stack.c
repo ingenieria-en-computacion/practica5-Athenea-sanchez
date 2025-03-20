@@ -1,13 +1,15 @@
 #include "stack.h"
 
 /**
- * Crea una nueva pila vacía y la devuelve.
+Crea una nueva pila vacía y la devuelve.
  * 
  * @return Una nueva pila vacía. Si la creación falla, el estado de la cola es inválido.
  * @details Esta función inicializa una pila vacía.
  */
 Stack stack_create(){
-
+    Stack p; 
+    p.top=-1;
+    return p;
 }
 
 /**
@@ -19,7 +21,13 @@ Stack stack_create(){
  *          la función no realiza ninguna operación.
  */
 void stack_push(Stack* s, Data d){
-
+    if (s->top<TAM-1){
+      s->top++;
+       s->data[s->top]= d; 
+    }
+   else {
+     printf("La pila esta llena\n"); 
+   }
 }
 
 /**
@@ -31,8 +39,17 @@ void stack_push(Stack* s, Data d){
  * @details Esta función elimina el elemento en la parte superior de la pila y lo devuelve.
  *          Si la pila está vacía, no se realiza ninguna operación y se devuelve un valor de error.
  */
-Data stack_pop(Stack* s){
-
+Data stack_pop(Stack* s){ // SE trabaja con su direccion de memoria * para que se cambir en todo el codigo
+    if (!stack_is_empty(s)){
+      Data d= s->data[s->top];
+     printf("El elememnto que se eliminara es: %i\n",d); 
+      s->top--; 
+      return d; 
+     }
+    else {
+      printf("La pila esta vacia\n"); 
+    }
+ return -1; 
 }
 
 /**
@@ -44,7 +61,8 @@ Data stack_pop(Stack* s){
  *          como `stack_pop` en una pila vacía.
  */
 int stack_is_empty(Stack* s){
-
+    if (s->top==-1) return 1; //true esta vacia
+    else (s->top!=-1)return 0;//false no esta vacia
 }
 
 /**
@@ -54,7 +72,10 @@ int stack_is_empty(Stack* s){
  * @details Esta función hace que top sea igual a -1
  */
 void stack_empty(Stack* s){
-
+    if (!stack_is_empty(s)){
+      printf("la cantidad de datos son:\n%i", s->top+1); 
+      s->top=-1; 
+    }
 }
 
 
@@ -68,5 +89,8 @@ void stack_empty(Stack* s){
  *          la salida estándar (stdout).
  */
 void stack_print(Stack *s){
+    for (int e=0; e<=s->top; e++){
+     printf("Los elementos de la pila son:\n %i", s->data[e]); 
+    }
 
 }
