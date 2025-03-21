@@ -1,4 +1,5 @@
 #include "stack.h"
+#include <stdlib.h>
 
 /**
  * Crea una nueva pila vacía y la devuelve.
