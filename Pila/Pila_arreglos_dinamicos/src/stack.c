@@ -15,7 +15,7 @@ Stack stack_create(int len){
  if (e.data==NULL) {
      printf("Error: Stack cannot be created \n");   
      e.top = -1;
-     e.size = 0;
+     e.len = 0;
  }    
  else {
      e.top=-1; 
