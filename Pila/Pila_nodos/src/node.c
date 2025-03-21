@@ -18,7 +18,7 @@ Node *new_node(Data d){
      new->next=NULL; 
    }
    else {
-     printf("Error: The node cannot be created"); 
+     printf("Error: The node cannot be created\n"); 
    }
    return new; 
 }
@@ -66,6 +66,6 @@ void print_node(Node* n){
      printf("Next Node: %p\n", n->next); 
     }
     else {
-        printf("Error: Node not found"); 
+        printf("Error: Node not found\n"); 
     }
 }
